@@ -5,6 +5,7 @@
 int main(int argc, char *argv[])
 {
     int escolha, num_1, maior = 0,num_2, sorteado;
+    int i,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
 
 
     srand(time(NULL));
@@ -41,7 +42,24 @@ int main(int argc, char *argv[])
                 printf("Tente outra vez!\n");
             }
             break;
-        case 3: printf("Não implementado\n"); break;
+        case 3:
+            printf("Entre com 10 números inteiros positivos:\n");
+            for(i=0;i<=10;i++){
+                scanf("%d",&num_3);
+                if(num_3 % 2 == 0){
+                    par++;
+                } if(num_3 % 2 != 0){
+                    impar++;
+                } if(num_3 < 0){
+                    negativo++;
+                } if(num_3 > 0){
+                    positivo++;
+                }
+            }
+            printf("Dos 10, %d número(s) é(são) par(es), %d número(s) é(são) impar(es), %d número(s) é(são) positivo(s) e "
+                   "%d número(s) é(são) negativo(s)\n",
+                   par, impar, positivo, negativo);
+            break;
         case 4: printf("Não implementado\n"); break;
         case 5: printf("Não implementado\n"); break;
         case 6: printf("Não implementado\n"); break;
