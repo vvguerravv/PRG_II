@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 {
     int escolha, num_1, maior = 0,num_2, sorteado;
     int i,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
+    int num_4;
 
 
     srand(time(NULL));
@@ -56,11 +57,22 @@ int main(int argc, char *argv[])
                     positivo++;
                 }
             }
-            printf("Dos 10, %d número(s) é(são) par(es), %d número(s) é(são) impar(es), %d número(s) é(são) positivo(s) e "
-                   "%d número(s) é(são) negativo(s)\n",
+            printf("Dos 10, %d número(s) é(são) par(es), %d número(s) é(são) impar(es), %d número(s) é(são) positivo(s) e %d número(s) é(são) negativo(s)\n",
                    par, impar, positivo, negativo);
             break;
-        case 4: printf("Não implementado\n"); break;
+        case 4:
+            sorteado = 1 + rand() %100;
+            printf("Escolha um número de 1 a 100:");
+            for(;num_4 != sorteado;){
+                scanf("%d",&num_4);
+                if(sorteado != num_4){
+                    printf("Tente novamente!\n");
+                } else{
+                    printf("Parabéns, você acertou!\n");
+                }
+
+            }
+            break;
         case 5: printf("Não implementado\n"); break;
         case 6: printf("Não implementado\n"); break;
         case 7: printf("Não implementado\n"); break;
