@@ -7,12 +7,13 @@ int main(int argc, char *argv[])
     int escolha, num_1 = 1, maior = 0,num_2, sorteado;
     int i,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
     int palpite_do_jogador,num_palpitesm, palpites_possiveis[100] = {0};
+    int tamanho_vetor,vetor[100],faltante = 0;
 
     srand(time(NULL));
 
     printf("Bem-vindo(a) ao sistema\n");
     printf("Tipos de exercícios:\n1-Ler N números e mostrar o maior entre eles\n"
-           "2- Advinhador de números\n3- Números pares, ímpares positivos e negativos\n4-Jogo de azar\n5-vetor\n6-Matriz Identidade\n"
+           "2- Advinhador de números\n3- Números pares, ímpares positivos e negativos\n4-Jogo de azar\n5-vetor de n-1 elementos\n6-Matriz Identidade\n"
            "7-Palindromos\n8-Repetição de vogais\n\n");
     printf("Selecione qual opção de exercício você irá utilizar: ");
     scanf("%d",&escolha);
@@ -83,7 +84,22 @@ int main(int argc, char *argv[])
                 }
             }
             break;
-        case 5: printf("Não implementado\n"); break;
+        case 5:
+            printf("Escolha o tamanho do vetor(Será o valor escolhido - 1): ");
+            scanf("%d", &tamanho_vetor);
+            printf("Escolha os valores de 1 até N com um número faltante no vetor: ");
+            for (int i = 1; i < tamanho_vetor; i++) {
+                scanf("%d", &vetor[i]);
+            }
+
+            for (int i = 0; i < tamanho_vetor - 1; i++) {
+                if (vetor[i] + 1 != vetor[i + 1]) {
+                    faltante = vetor[i] + 1;
+
+                }
+            }
+            printf("O número que está faltando é o %d\n", faltante);
+            break;
         case 6: printf("Não implementado\n"); break;
         case 7: printf("Não implementado\n"); break;
         case 8: printf("Não implementado\n"); break;
