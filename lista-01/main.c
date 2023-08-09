@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    int escolha, num_1, maior = 0,num_2, sorteado;
+    int escolha, num_1 = 1, maior = 0,num_2, sorteado;
     int i,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
     int palpite_do_jogador,num_palpitesm, palpites_possiveis[100] = {0};
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
             break;
         case 3:
             printf("Entre com 10 números inteiros positivos:\n");
-            for(i=0;i<=10;i++){
+            for(i=0;i<10;i++){
                 scanf("%d",&num_3);
                 if(num_3 % 2 == 0){
                     par++;
