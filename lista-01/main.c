@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +9,7 @@ int main(int argc, char *argv[])
     int i,j,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
     int palpite_do_jogador,num_palpitesm, palpites_possiveis[100] = {0};
     int tamanho_vetor,vetor[100],matriz[10][10] = {0},faltante = 0;
+    char palavra[100],inverso[100];
 
 
     srand(time(NULL));
@@ -113,7 +115,20 @@ int main(int argc, char *argv[])
             }
 
             break;
-        case 7: printf("Não implementado\n"); break;
+        case 7:
+            printf("Digite a palavra ou frase:");
+            scanf("%s",palavra);
+            j = 1;
+            for(i = 0; i < strlen(palavra);i++){
+                inverso[i] = palavra[strlen(palavra) - j];
+                j++;
+            }
+            if(strcmp(palavra,inverso) == 0){
+                printf("'%s' é uma palavra palindroma.\n", palavra);
+            } else{
+                printf("'%s' não é uma palavra palindroma.\n",palavra);
+            }
+            break;
         case 8: printf("Não implementado\n"); break;
     }
 
