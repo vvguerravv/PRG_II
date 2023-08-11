@@ -5,9 +5,10 @@
 int main(int argc, char *argv[])
 {
     int escolha, num_1 = 1, maior = 0,num_2, sorteado;
-    int i,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
+    int i,j,num_3, par = 0, impar = 0, positivo = 0, negativo = 0;
     int palpite_do_jogador,num_palpitesm, palpites_possiveis[100] = {0};
-    int tamanho_vetor,vetor[100],faltante = 0;
+    int tamanho_vetor,vetor[100],matriz[10][10] = {0},faltante = 0;
+
 
     srand(time(NULL));
 
@@ -100,7 +101,18 @@ int main(int argc, char *argv[])
             }
             printf("O número que está faltando é o %d\n", faltante);
             break;
-        case 6: printf("Não implementado\n"); break;
+        case 6:
+            for (int i = 0; i < 10; i++) {
+                matriz[i][i] = 1;
+            }
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    printf("%d ", matriz[i][j]);
+                }
+                printf("\n");
+            }
+
+            break;
         case 7: printf("Não implementado\n"); break;
         case 8: printf("Não implementado\n"); break;
     }
