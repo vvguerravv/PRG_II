@@ -1,0 +1,6 @@
+#ifndef INC_2023_08_22_FATORIAL_H
+#define INC_2023_08_22_FATORIAL_H
+
+
+
+#endif //INC_2023_08_22_FATORIAL_H
