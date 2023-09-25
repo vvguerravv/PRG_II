@@ -5,6 +5,8 @@ set(CMAKE_C_STANDARD 17)
 
 include(FetchContent)
 
+#cmake_policy(SET CMP01)
+
 FetchContent_Declare(
         libprg
         #GIT_REPOSITORY https://github.com/emersonmello/libprg.git
