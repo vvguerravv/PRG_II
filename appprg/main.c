@@ -62,22 +62,28 @@ int main(int argc, char *argv[])
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
                 busca_linear(&vetor,total,elemento);
+
+                printf("%d\n",busca_linear(&vetor,total,elemento));
                 break;
 
             case 5:
                 printf("Selecione o número que será buscado: ");
-                scanf("%d",&elemento);
+                scanf("%d\n",&elemento);
                 busca_bin_int(&vetor,total,elemento);
+
+                printf("%d\n",busca_bin_int(&vetor,total,elemento));
                 break;
 
             case 6:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
                 busca_bin_rec(&vetor,inicio,fim,elemento);
+
+                printf("%d",busca_bin_rec(&vetor,inicio,fim,elemento));
                 break;
 
             case 7:
-                for(int i = 0; i <= tamanho; i++){
+                for(int i = 0; i < total; i++){
                     printf("%d\n",&vetor[i]);
                 }
         }
