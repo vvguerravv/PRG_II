@@ -24,13 +24,13 @@ int main(int argc, char *argv[])
             case 1:
                 printf("Selecione o tamanho do vetor: ");
                 scanf("%d",&tamanho);
-                criar(&vetor,tamanho);
+                criar(vetor,tamanho);
                 printf("Ordenada ou não ordenada? OBS: Selecione \"O\" para ordenada e \"N\" para não ordenada: ");
-                scanf("%s",&op);
+                scanf("%s",op);
                 if(strcmp(op,"O") == 0){
-                    povoar_ord(&vetor,&total,tamanho);
+                    povoar_ord(vetor,&total,tamanho);
                 } if(strcmp(op,"N") == 0){
-                    povoar_nao_ord(&vetor,&total,tamanho);
+                    povoar_nao_ord(vetor,&total,tamanho);
                 }
                 break;
 
@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
                 scanf("%d",&elemento);
 
                 if(strcmp(op,"O") == 0){
-                    insere_ord(&vetor,&total,tamanho,elemento);
-                    printf("%d\n",insere_ord(&vetor,&total,tamanho,elemento));
+                   int result = insere_ord(vetor,&total,tamanho,elemento);
+                    printf("%d\n",result);
                 } if(strcmp(op,"N") == 0){
-                    insere_nao_ord(&vetor,&total,tamanho,elemento);
-                    printf("%d\n",insere_nao_ord(&vetor,&total,tamanho,elemento));
+                   int result = insere_nao_ord(vetor,&total,tamanho,elemento);
+                    printf("%d\n",result);
                 }
                 break;
 
@@ -52,46 +52,46 @@ int main(int argc, char *argv[])
                 scanf("%d",&elemento);
 
                 if(strcmp(op,"O") == 0){
-                    remove_num_ord(&vetor,&total,tamanho,elemento);
+                    remove_num_ord(vetor,&total,elemento);
                 } if(strcmp(op,"N") == 0){
-                    remove_num_nao_ord(&vetor,&total,tamanho,elemento);
+                    remove_num_nao_ord(vetor,&total,elemento);
         }
                 break;
 
             case 4:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
-                busca_linear(&vetor,total,elemento);
+                int busc = busca_linear(vetor,total,elemento);
 
-                printf("%d\n",busca_linear(&vetor,total,elemento));
+                printf("%d\n",busc);
                 break;
 
             case 5:
                 printf("Selecione o número que será buscado: ");
-                scanf("%d\n",&elemento);
-                busca_bin_int(&vetor,total,elemento);
+                scanf("%d",&elemento);
+                busc = busca_bin_int(vetor,total,elemento);
 
-                printf("%d\n",busca_bin_int(&vetor,total,elemento));
+                printf("%d\n",busc);
                 break;
 
             case 6:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
-                busca_bin_rec(&vetor,inicio,fim,elemento);
+                busc = busca_bin_rec(vetor,inicio,fim,elemento);
 
-                printf("%d",busca_bin_rec(&vetor,inicio,fim,elemento));
+                printf("%d\n",busc);
                 break;
 
             case 7:
                 for(int i = 0; i < total; i++){
-                    printf("%d\n",&vetor[i]);
+                    printf("%d\n",vetor[i]);
                 }
         }
 
 
     }
 
-    libera_memoria(&vetor,tamanho);
+    libera_memoria(vetor,tamanho);
 
     return 0;
 }
