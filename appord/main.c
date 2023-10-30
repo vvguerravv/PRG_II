@@ -33,4 +33,15 @@ int main()
     imprimi(&ord);
     printf("=======================\n");
 
+    printf("Merge sort: ");
+    povoar(&ord);
+    inicio_relogio_parede(&inicio);
+    int esquerda = 0;
+    int direita = ord.tamanho - 1;
+    merge_sort(&ord,esquerda,direita);
+    printf("%f\n", fim_relogio_parede(&inicio));
+    imprimi(&ord);
+    printf("=======================\n");
+
+    return 0;
 }
