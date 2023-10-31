@@ -2,46 +2,73 @@
 
 int main()
 {
-    struct timeval inicio;
+    struct timeval start;
+    clock_t comecar;
     ord_t ord;
     printf("Selecione o tamanho do vetor: ");
     scanf("%d",&ord.tamanho);
     criar_vet(&ord);
 
     printf("=======================\n");
-    printf("Bubble: ");
+    printf("Bubble:\n");
     povoar(&ord);
-    inicio_relogio_parede(&inicio);
-    bubble(&ord,false);
+    comecar = clock();
+    inicio(&start);
+    bubble(&ord,true);
+    printf("Vetor: ");
     imprimi(&ord);
-    printf("%f\n", fim_relogio_parede(&inicio));
+    printf("CPU:%f\n", fim_CPU(comecar));
+    printf("Tempo de relógio de parede: %f\n", fim_relogio_parede(&start));
+
     printf("=======================\n");
 
-    printf("Insert: ");
+    printf("Insert:\n");
     povoar(&ord);
-    inicio_relogio_parede(&inicio);
+    comecar = clock();
+    inicio(&start);
     insert(&ord);
-    printf("%f\n", fim_relogio_parede(&inicio));
+    printf("CPU:%f\n", fim_CPU(comecar));
+    printf("Tempo de relógio de parede: %f\n", fim_relogio_parede(&start));
+    printf("Vetor: ");
     imprimi(&ord);
     printf("=======================\n");
 
-    printf("Selection: ");
+    printf("Selection:\n");
     povoar(&ord);
-    inicio_relogio_parede(&inicio);
-    selection(&ord,false);
-    printf("%f\n", fim_relogio_parede(&inicio));
+    comecar = clock();
+    inicio(&start);
+    selection(&ord,true);
+    printf("CPU:%f\n", fim_CPU(comecar));
+    printf("Tempo de relógio de parede: %f\n", fim_relogio_parede(&start));
+    printf("Vetor: ");
     imprimi(&ord);
     printf("=======================\n");
 
-    printf("Merge sort: ");
+    printf("Merge sort:\n");
     povoar(&ord);
-    inicio_relogio_parede(&inicio);
-    int esquerda = 0;
-    int direita = ord.tamanho - 1;
-    merge_sort(&ord,esquerda,direita);
-    printf("%f\n", fim_relogio_parede(&inicio));
+    comecar = clock();
+    inicio(&start);
+    int left = 0;
+    int right = ord.tamanho - 1;
+    merge_sort(&ord, left, right);
+    printf("CPU:%f\n", fim_CPU(comecar));
+    printf("Tempo de relógio de parede: %f\n", fim_relogio_parede(&start));
+    printf("Vetor: ");
     imprimi(&ord);
     printf("=======================\n");
+
+    printf("Quick sort:\n");
+    povoar(&ord);
+    comecar = clock();
+    inicio(&start);
+    quick_sort(&ord, left, right);
+    printf("CPU:%f\n", fim_CPU(comecar));
+    printf("Tempo de relógio de parede: %f\n", fim_relogio_parede(&start));
+    printf("Vetor: ");
+    imprimi(&ord);
+    printf("=======================\n");
+
+
 
     return 0;
 }
