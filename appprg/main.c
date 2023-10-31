@@ -1,10 +1,11 @@
 #include <libprg/libprg.h>
 
-int main(int argc, char *argv[])
+int main()
 {
     int escolha = -1;
-    int *vetor, tamanho,total,elemento,inicio,fim;
+    int elemento;
     char op[2] = {};
+    lista_t lista;
 
     printf("Escolha o que você quer fazer!\n");
 
@@ -22,16 +23,22 @@ int main(int argc, char *argv[])
 
         switch (escolha) {
             case 1:
+            label:
                 printf("Selecione o tamanho do vetor: ");
-                scanf("%d",&tamanho);
-                criar(vetor,tamanho);
+                scanf("%d",&lista.tamanho);
+                if(criar(&lista) == 1){
+                    printf("Vetor criado com sucesso!!\n");
+                } else{
+                    printf("O vetor não foi criado!!\n");
+                    goto label;
+                }
                 printf("Ordenada ou não ordenada? OBS: Selecione \"O\" para ordenada e \"N\" para não ordenada: ");
                 scanf("%s",op);
                 if(strcmp(op,"O") == 0){
-                    povoar_ord(vetor,&total,tamanho);
+                    povoar_ord(&lista);
                 } if(strcmp(op,"N") == 0){
-                    povoar_nao_ord(vetor,&total,tamanho);
-                }
+            povoar_nao_ord(&lista);
+        }
                 break;
 
             case 2:
@@ -39,12 +46,18 @@ int main(int argc, char *argv[])
                 scanf("%d",&elemento);
 
                 if(strcmp(op,"O") == 0){
-                   int result = insere_ord(vetor,&total,tamanho,elemento);
-                    printf("%d\n",result);
+                    if(insere_ord(&lista,elemento) == 1){
+                        printf("Elemento inserido com sucesso!\n");
+                    }else{
+                        printf("Elemento não inserido! Verifique o tamanho do vetor e se ele está cheio e tente novamente.\n");
+                    }
                 } if(strcmp(op,"N") == 0){
-                   int result = insere_nao_ord(vetor,&total,tamanho,elemento);
-                    printf("%d\n",result);
-                }
+            if(insere_nao_ord(&lista,elemento) == 1){
+                printf("Elemento inserido com sucesso!\n");
+            }else{
+                printf("Elemento não inserido! Verifique o tamanho do vetor e se ele está cheio e tente novamente\n");
+            }
+        }
                 break;
 
             case 3:
@@ -52,46 +65,65 @@ int main(int argc, char *argv[])
                 scanf("%d",&elemento);
 
                 if(strcmp(op,"O") == 0){
-                    remove_num_ord(vetor,&total,elemento);
+                    if(remove_num_ord(&lista,elemento) == 1){
+                        printf("Elemento removido com sucesso!\n");
+                    }else{
+                        printf("Elemento não removido! Verifique se ele faz parte do vetor e tente novamente!\n");
+                    }
                 } if(strcmp(op,"N") == 0){
-                    remove_num_nao_ord(vetor,&total,elemento);
+            if(remove_num_nao_ord(&lista,elemento) == 1){
+                printf("Elemento removido com sucesso!\n");
+            }else{
+                printf("Elemento não removido! Verifique se ele faz parte do vetor e tente novamente!\n");
+            }
         }
                 break;
 
             case 4:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
-                int busc = busca_linear(vetor,total,elemento);
-
-                printf("%d\n",busc);
+                if(busca_linear(&lista,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n",elemento,busca_linear(&lista,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
+                }
                 break;
 
             case 5:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
-                busc = busca_bin_int(vetor,total,elemento);
+                busca_bin_int(&lista,elemento);
 
-                printf("%d\n",busc);
+                if(busca_bin_int(&lista,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n",elemento,busca_bin_int(&lista,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
+                }
+
                 break;
 
             case 6:
                 printf("Selecione o número que será buscado: ");
                 scanf("%d",&elemento);
-                busc = busca_bin_rec(vetor,inicio,fim,elemento);
 
-                printf("%d\n",busc);
+                if( busca_bin_rec(&lista,0,lista.tamanho,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n", elemento,busca_bin_rec(&lista,0,lista.tamanho,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
+                }
                 break;
 
             case 7:
-                for(int i = 0; i < total; i++){
-                    printf("%d\n",vetor[i]);
+                for(int i = 0; i < lista.total; i++){
+                    printf("%d\n",lista.vetor[i]);
                 }
         }
 
 
     }
 
-    libera_memoria(vetor,tamanho);
+    libera_memoria(&lista);
 
     return 0;
 }
+
