@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <limits.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <time.h>
+#include <libprg/libprg.h>
 
 FILE *abrir_arquivo(char *nome_arq)
 {
@@ -31,21 +27,35 @@ int main(int argc, char *argv[])
     long tam =tamananho_arq("/home/aluno/Downloads/arq.txt");
 
     long int tam_temp = tam/ 5;
-
+    printf("%ld\n",tam);
     printf("%ld\n\n",tam_temp);
 
-    int i = 0;
+    int i = 0,total = 0;
     char file_name[L_tmpnam];
+    long int num;
+    FILE *arqu = abrir_arquivo("/home/aluno/Downloads/arq.txt");
+
+    printf("%d\n",total);
+
     while(i < 5){
         FILE *arq;
         arq = fopen(tmpnam(file_name),"w");
-
+        while(total < tam_temp){
+            fscanf(arqu,"%ld",&num);
+            total+=4;
+            fprintf(arq,"%ld",num);
+            long int teste;
+            fscanf(arq,"%ld",&teste);
+            printf("Teste: %ld ",teste);
+        }
 
         fclose(arq);
         printf("%s\n",file_name);
         i++;
     }
 
+
+    fclose(arqu);
 
 
 //    FILE *arq = fopen("/home/aluno/Downloads/arq.txt","w");
