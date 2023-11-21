@@ -70,11 +70,13 @@ void destruct_dictionary(dictionary_t *dictionary)
 {
     if(dictionary != NULL){
         for(int i = 0; i < dictionary->size; i++){
-            //TODO destruir lista encadeada
-            while(dictionary->array[i] != NULL){
-                destruct_node(dictionary->array[i]);
-                dictionary->array[i] = dictionary->array[i]->next;
+            node_t *current = dictionary->array[i];
+            while(current != NULL){
+                node_t *next = current->next;
+                destruct_node(current);
+                current = next;
             }
+            dictionary->array[i] = NULL;
         }
         free(dictionary->array);
         free(dictionary);
@@ -106,8 +108,6 @@ bool insert(dictionary_t *dictionary,char *key, people_t *people)
     }
 
     node->people = people;
-    //TODO não está tratando colisões
-    // se houver colisão é necessária usar uma lista encadeada
     node->next = NULL;
     if(dictionary->array[index] == NULL){
         dictionary->array[index] = node;
@@ -115,12 +115,6 @@ bool insert(dictionary_t *dictionary,char *key, people_t *people)
         node->next = dictionary->array[index];
         dictionary->array[index] = node;
     }
-
-
-
-
-    // Libera a memória se existir um nó anterior na posição
-//    destruct_node(dictionary->array[index]);
 
     return true;
 }
@@ -149,6 +143,28 @@ void print_people(dictionary_t *dictionary, char *key)
     }
 }
 
+bool removeDictionary(dictionary_t *dictionary,char *key)
+{
+    int index = hash(key,dictionary->size);
+    node_t *current = dictionary->array[index];
+    node_t *previous = NULL;
+    while(current != NULL){
+        if(strcmp(key,current->key) == 0){
+            if(previous == NULL){
+                dictionary->array[index] = current->next;
+                destruct_node(current);
+                return true;
+            }else{
+                previous->next = current->next;
+                destruct_node(current);
+                return true;
+            }
+        }
+        previous = current;
+        current = current->next;
+    }
+    return false;
+}
 
 int main(int argc, char **argv){
     dictionary_t *dictionary = create(3);
@@ -164,11 +180,11 @@ int main(int argc, char **argv){
     people->name = strdup("Juca");
     insert(dictionary,people->cpf,people);
 
-    people = malloc(sizeof(people_t));
-    people->cpf = strdup("456");
-    people->email = strdup("juca2@example.org");
-    people->name = strdup("Juca2");
-    insert(dictionary,people->cpf,people);
+    people_t *people2 = malloc(sizeof(people_t));
+    people2->cpf = strdup("456");
+    people2->email = strdup("juca2@example.org");
+    people2->name = strdup("Juca2");
+    insert(dictionary,people2->cpf,people2);
 
 
     people = malloc(sizeof(people_t));
@@ -180,6 +196,10 @@ int main(int argc, char **argv){
     print_people(dictionary,"123");
     print_people(dictionary,"456");
     print_people(dictionary,"789");
+
+    removeDictionary(dictionary,"123");
+//    print_people(dictionary,"123");
+
     destruct_dictionary(dictionary);
 
     return 0;
