@@ -5,7 +5,7 @@ int main()
 
     struct timeval start;
     clock_t comecar;
-    int tamanho,i = 0;
+    int tamanho;
     tree_t *root = NULL;
 
     printf("Digite o tamanho da árvore: ");
@@ -16,16 +16,11 @@ int main()
     comecar = clock();
     inicio(&start);
 
-    root = insert_value(root, 10);
-    root = insert_value(root, 13);
-    root = insert_value(root, 23);
-    root = insert_value(root, 21);
-    root = insert_value(root, 24);
 
-//    while(i < tamanho - 1){
-//        root = insert_value(root, rand() % 100 + 1);
-//        i++;
-//    }
+
+    for(int i = 0; i < tamanho; i++){
+        root = insert_value(root,rand() % 100 + 1);
+    }
 
     printf("\nTempo Parede: %f\n", fim_relogio_parede(&start));
     printf("CPU: %f\n", fim_CPU(comecar));
@@ -40,15 +35,24 @@ int main()
     inicio(&start);
     printf("Menor número: %d\t\t", minNum(root));
     printf("Tempo Parede: %f\t", fim_relogio_parede(&start));
+    printf("CPU: %f\n\n", fim_CPU(comecar));
+
+    int level = 0,num_insert;
+
+    printf("Digite o número que deseja inserir: ");
+    scanf("%d",&num_insert);
+
+    int num_search;
+
+    comecar = clock();
+    inicio(&start);
+
+    num_search = searchTree(root,num_insert);
+    printf("Tempo Parede: %f\t", fim_relogio_parede(&start));
     printf("CPU: %f\n", fim_CPU(comecar));
-
-    int level = 0;
-
-    tree_t *aux = teste(root,23,&level);
-
-    if(aux == NULL){
-        printf("Número não encontrado\n");
-    } else{
+    if(num_search == 1){
+        printf("O número %d já está na árvore!\n",num_insert);
+        tree_t *aux = son(root,num_insert,&level);
         if(aux->right != NULL){
             printf("Filho da direita "
                    "do  número %d é o número: %d\n",aux->value,aux->right->value);
@@ -57,7 +61,30 @@ int main()
                    "do  número %d é o número: %d\n",aux->value,aux->left->value);
         }
         printf("O número %d está no nível %d na árvore.\n",aux->value,level);
+    } else{
+        root = insert_value(root, num_insert);
     }
+
+    printf("Selecione um número para excluir: ");
+    scanf("%d",&num_insert);
+    if(!searchTree(root,num_insert)){
+        printf("Número não encontrado na árvore!\n");
+    }else{
+        root = removeNum(root,num_insert);
+    }
+
+    root = NULL;
+
+    root = insert_value(root,6);
+    root = insert_value(root,4);
+    root = insert_value(root,7);
+    root = insert_value(root,2);
+    root = insert_value(root,5);
+    root = insert_value(root,8);
+
+//    inOrder(root);
+//    preOder(root);
+    posOrder(root);
 
     return 0;
 }
