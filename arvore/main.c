@@ -63,6 +63,7 @@ int main()
         printf("O número %d está no nível %d na árvore.\n",aux->value,level);
     } else{
         root = insert_value(root, num_insert);
+        tamanho++;
     }
 
     printf("Selecione um número para excluir: ");
@@ -71,20 +72,19 @@ int main()
         printf("Número não encontrado na árvore!\n");
     }else{
         root = removeNum(root,num_insert);
+        tamanho--;
     }
 
-    root = NULL;
-
-    root = insert_value(root,6);
-    root = insert_value(root,4);
-    root = insert_value(root,7);
-    root = insert_value(root,2);
-    root = insert_value(root,5);
-    root = insert_value(root,8);
 
 //    inOrder(root);
 //    preOder(root);
-    posOrder(root);
+//    posOrder(root);
+
+//    width(root,tamanho);
+
+
+    printGraph(root);
+
 
     return 0;
 }
